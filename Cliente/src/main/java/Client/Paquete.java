@@ -11,9 +11,12 @@ import org.json.simple.parser.ParseException;
 /**
  * 
  * Clase que sirve para enviar paquetes entre el servidor y el cliente
+ * tipo_operacion 0 pedir conectarse ingresando el nombre de usuario que va utilizar
  * tipo_operacion 1 pedir lista de usuarios conectados
- * tipo_operacion 2 pedir realizar llamada a un usuario especifico
- * 
+ * tipo_operacion 2 pedir conectar llamada con usuario especifico
+ * tipo_operacion 3 enviar mensaje dentro de llamada
+ * tipo_operacion 4 recibir mensaje dentro de llamada
+ * tipo_operacion 5 terminar llamada 
  * 
  */
 public class Paquete {

@@ -17,6 +17,7 @@ public class TCPServerHilo extends Thread {
     Cliente cliente;
 
     TCP servidor;
+    private boolean enLlamada;
 
     public TCPServerHilo(Socket socket, TCP servidor) {
         super("TCPServerHilo");
@@ -29,27 +30,21 @@ public class TCPServerHilo extends Thread {
         try {
             SocketAddress addr = socket.getRemoteSocketAddress();
             int port = socket.getPort();
-            System.out.println("La dir del cliente es: " + addr.toString());
-            System.out.println("Su puerto es: " + port);
 
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            out.println("Bienvenido!");
-            out.println("Ingrese un nombre de usuario");
-            String inputLine = in.readLine();
-            Cliente e = new Cliente(addr, port, inputLine);
-            this.cliente = e;
-            servidor.clientesEnLinea.add(e);
-            out.println("Cliente agregado");
-            System.out.println("Cliente agregado");
-
+            String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("esperando tcp");
                 Paquete paquete = Paquete.JSONstrToObj(inputLine);
 
                 // Vemos que codigo de operacion tiene
-                if (paquete.getTipo_operacion() == 2) {
+                if (paquete.getTipo_operacion()==0) {
+                    Cliente e = new Cliente(addr, port, paquete.getMensaje());
+                    this.cliente = e;
+                    servidor.clientesEnLinea.add(e);
+                }else if (paquete.getTipo_operacion() == 2) {
                     System.out.println("paquete recibido llamando a 2");
                     llamarA(paquete.getMensaje());
                 }
@@ -113,9 +108,14 @@ public class TCPServerHilo extends Thread {
             // System.out.println("puerto hiloCliente2 "+ servidor.hilosClientes.get(posHiloCliente2));
             // System.out.println("puerto hiloCliente2 "+ hiloCliente2);
             System.out.println("Antes del while");
-            while (true) {
+            enLlamada=true;
+            while (enLlamada) {
                 String entrada = this.in.readLine();
-                servidor.hilosClientes.get(posHiloCliente2).out.println(entrada);
+                Paquete pentrada = Paquete.JSONstrToObj(entrada);
+                if (pentrada.getTipo_operacion()==3) {
+                    Paquete p = new Paquete(0, pentrada.getMensaje(), 4);
+                    servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
+                }
             }
             // System.out.println("despues del enviar la salida al fer");
             // System.out.println("despues del enviar la salida al otro");

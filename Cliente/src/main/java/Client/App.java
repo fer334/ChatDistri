@@ -25,24 +25,23 @@ import org.json.simple.parser.ParseException;
  */
 public class App {
     public static void main(String[] args) throws ParseException {
-        String direccionServidor = "127.0.0.1";
-
+        
         // // Envio paquete de primera conexion
         // respuesta = udp.enviarPaquete(new Paquete(0,"Fer2",0));
         // System.out.println(respuesta.JSONToString());
-
+        
         // // Si al conectarse no hubo problemas, enviamos otro paquete
         // if(respuesta.getEstado()==0){
-        // Pido la lista de todos los usuarios conectados
-        // }
+            // Pido la lista de todos los usuarios conectados
+            // }
+            
+        String direccionServidor = "127.0.0.1";
+        int puertoServidor = 4444;
+        TCP tcp = new TCP(direccionServidor,puertoServidor);
 
-        TCP tcp = new TCP();
-        tcp.conectarse();
-
-        // int puertoServidor = 9876;
         // Paquete respuesta;
 
-        // UDP udp = new UDP(direccionServidor,puertoServidor);
+        UDP udp = new UDP(direccionServidor,puertoServidor);
         // respuesta=udp.enviarPaquete(new Paquete(0,"",1));
         // System.out.println(respuesta.JSONToString());
 
@@ -64,7 +63,7 @@ public class App {
         // // TODO Auto-generated catch block
         // e.printStackTrace();
         // }
-        MarcoCliente mimarco = new MarcoCliente(tcp);
+        MarcoCliente mimarco = new MarcoCliente(tcp,udp);
 
         mimarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -73,11 +72,13 @@ public class App {
 class MarcoCliente extends JFrame {
 
     TCP tcp;
-    public MarcoCliente(TCP tcp) {
+    UDP udp;
+    public MarcoCliente(TCP tcp,UDP udp) {
         this.tcp=tcp;
+        this.udp=udp;
         setBounds(600, 300, 280, 350);
 
-        LaminaMarcoCliente milamina = new LaminaMarcoCliente(tcp);
+        LaminaMarcoCliente milamina = new LaminaMarcoCliente(tcp,udp);
 
         add(milamina);
 
@@ -122,13 +123,15 @@ class LaminaMarcoCliente extends JPanel implements Runnable{//interfaz
 
     private JTextField campo1;//campo donde se escribe el texto a enviar
     private JLabel nick; //campo donde se visualizará el nick name del usuario
-    private JComboBox ip; //campo donde se visualizará la direccion ip del cliente con el que se está llevando a cabo la conversacion
+    private JComboBox<String> ip; //campo donde se visualizará la direccion ip del cliente con el que se está llevando a cabo la conversacion
     private JTextArea campochat;//area de chat
     private JButton miboton; //boton para enviar mensajes
     TCP tcp;
+    UDP udp;
 
-    public LaminaMarcoCliente(TCP tcp ) {
+    public LaminaMarcoCliente(TCP tcp, UDP udp ) {
     	this.tcp= tcp;
+    	this.udp= udp;
     	String nick_usuario = JOptionPane.showInputDialog("Ingrese su Ni:");
     	
     	JLabel n_nick = new JLabel("Nick:");
@@ -141,7 +144,10 @@ class LaminaMarcoCliente extends JPanel implements Runnable{//interfaz
         JLabel texto = new JLabel("Online:");
         add(texto);
 
-        ip = new JComboBox();//configuramos el cuadro de texto para que aparezca a la izquierda 
+        tcp.conectarse(nick_usuario);
+
+
+        ip = new JComboBox<String>();//configuramos el cuadro de texto para que aparezca a la izquierda 
         ip.addItem("Usuario1");
         ip.addItem("Usuario2");
         ip.addItem("Usuario3");
@@ -160,9 +166,13 @@ class LaminaMarcoCliente extends JPanel implements Runnable{//interfaz
         JButton ferButton = new JButton("fer"); // boton para enviar el texto escrito
         JButton a = new JButton("a"); // boton para enviar el texto escrito
 
-        EnviaTexto mievento = new EnviaTexto(this.tcp);
-
-        miboton.addActionListener(mievento);
+        miboton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                campochat.append(campo1.getText()+"\n");
+                tcp.enviar(campo1.getText());
+            }
+        });
         ferButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -195,52 +205,6 @@ class LaminaMarcoCliente extends JPanel implements Runnable{//interfaz
                 campochat.append(this.tcp.escuchar() + "\n");
             
             }
-                
-    }
-
-    private class EnviaTexto implements ActionListener {
-
-        private TCP tcp;
-
-        public EnviaTexto(TCP tcp) {
-            this.tcp = tcp;
-            
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            // try {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                //System.out.println(campo1.getText());
-                
-                campochat.append("\n" + campo1.getText());
-
-                this.tcp.enviar(campo1.getText());
-                
-            //     Socket misocket = new Socket("192.168.100.77", 9090);
-
-            //     PaqueteEnvio datos = new PaqueteEnvio();
-
-            //     datos.setNick(nick.getText());//almacenamos el texto escrito en el cuadro de texto para el nick name
-            //     datos.setIP(ip.getSelectedItem().toString());//almacenamos el texto escrito en el cuadro de texto para la ip
-            //     datos.setMensaje(campo1.getText());
-
-            //     ObjectOutputStream paquete_datos = new ObjectOutputStream(misocket.getOutputStream());//se crea un objeto para cargarlo posteriormente de los datos a ser enviados
-
-            //     paquete_datos.writeObject(datos); //se cargan los datos del objeto PaqueteEnvio
-
-            //     misocket.close(); //se cierra el socket
-
-            //     //Debemos enviar el objeto datos al servidor ya que él actuará de intermediario entre un cliente y otro
-            //     //DataOutputStream flujo_salida = new DataOutputStream(misocket.getOutputStream());
-            //     //flujo_salida.writeUTF(campo1.getText());
-            //     //flujo_salida.close();
-            // } catch (IOException ex) {
-            //     System.out.println(ex.getMessage());
-                
-            // }
-
-        }
 
     }
 

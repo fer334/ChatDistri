@@ -12,9 +12,9 @@ public class TCP {
     PrintWriter out = null;
     BufferedReader in = null;
 
-    public TCP(){
+    public TCP(String dir, int port){
         try {
-            unSocket = new Socket("127.0.0.1", 4444);
+            unSocket = new Socket(dir, port);
             out = new PrintWriter(unSocket.getOutputStream(), true);
     
             // viene del servidor
@@ -26,56 +26,14 @@ public class TCP {
         // enviamos nosotros
     }
     
-    void conectarse() {
+    void conectarse(String username) {
 
-
-        try {
-            
-
-            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-
-            System.out.println(in.readLine());
-            System.out.println(in.readLine());
-            // escribimos al servidor nuestro nombre de usuario
-            out.println(stdIn.readLine());
-            System.out.println(in.readLine());
-            
-
-            // while ((fromServer = in.readLine()) != null) {
-            // System.out.println("Servidor: " + fromServer);
-            // if (fromServer.equals("Bye")) {
-            // break;
-            // }
-
-            // fromUser = stdIn.readLine();
-            // if (fromUser != null) {
-            // System.out.println("Cliente: " + fromUser);
-
-            // // escribimos al servidor
-            // out.println(fromUser);
-            // }
-            // }
-
-            // out.close();
-            // in.close();
-            // stdIn.close();
-            // unSocket.close();
-        } catch (UnknownHostException e) {
-            System.err.println("Host desconocido");
-            System.exit(1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error de I/O en la conexion al host");
-            System.exit(1);
-        }
-
+        // escribimos al servidor nuestro nombre de usuario
+        Paquete p = new Paquete(0, username, 0);
+        out.println(p.JSONToString());
     }
 
 	public void realizarLlamada(String usuario) {
-
-        String fromServer;
-        String fromUser;
-        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         Paquete paquete = new Paquete(0, usuario, 2);
         out.println(paquete.JSONToString());
     }
@@ -109,7 +67,11 @@ public class TCP {
 
 	public String escuchar() {
         try {
-            return in.readLine();
+            Paquete p = Paquete.JSONstrToObj(in.readLine());
+            if (p.getTipo_operacion()==4) {
+                return p.getMensaje();
+            }
+            return "";
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -118,6 +80,7 @@ public class TCP {
 	}
 
 	public void enviar(String text) {
-        out.println(text);
+        Paquete paquete = new Paquete(0,text,3);
+        out.println(paquete.JSONToString());
 	}
 }
