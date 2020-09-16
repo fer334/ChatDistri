@@ -78,32 +78,8 @@ public class TCP {
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         Paquete paquete = new Paquete(0, usuario, 2);
         out.println(paquete.JSONToString());
-
-        try {
-            fromUser = stdIn.readLine();
-            System.out.println("Cliente: " + fromUser);
-            // escribimos al servidor
-            out.println(fromUser);
-
-            while ((fromServer = in.readLine()) != null) {
-                System.out.println("Servidor: " + fromServer);
-                if (fromServer.equals("Bye")) {
-                    break;
-                }
-
-                fromUser = stdIn.readLine();
-                if (fromUser != null) {
-                    System.out.println("Cliente: " + fromUser);
-
-                    // escribimos al servidor
-                    out.println(fromUser);
-                }
-            }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-	}
+    }
+    
 
 	public void recibirLlamada() {
         String fromServer;
@@ -129,5 +105,19 @@ public class TCP {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+	}
+
+	public String escuchar() {
+        try {
+            return in.readLine();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "";
+        }
+	}
+
+	public void enviar(String text) {
+        out.println(text);
 	}
 }

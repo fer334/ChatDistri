@@ -100,16 +100,9 @@ public class TCPServerHilo extends Thread {
     }
 
     private void llamarA(String usuario) {
-        TCPServerHilo hiloCliente2 = null;
         int posHiloCliente2 = 0;
         for (int i = 0; i < servidor.hilosClientes.size(); i++) {
             if (servidor.hilosClientes.get(i).cliente.getUsername().equals(usuario)) {
-                try {
-                    hiloCliente2 = (TCPServerHilo) servidor.hilosClientes.get(posHiloCliente2).clone();
-                } catch (CloneNotSupportedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
                 posHiloCliente2 = i;
                 break;
             }
@@ -121,8 +114,7 @@ public class TCPServerHilo extends Thread {
             // System.out.println("puerto hiloCliente2 "+ hiloCliente2);
             System.out.println("Antes del while");
             while (true) {
-                String entrada = servidor.hilosClientes.get(posHiloCliente2).in.readLine();
-                this.out.println(entrada);
+                String entrada = this.in.readLine();
                 servidor.hilosClientes.get(posHiloCliente2).out.println(entrada);
             }
             // System.out.println("despues del enviar la salida al fer");
