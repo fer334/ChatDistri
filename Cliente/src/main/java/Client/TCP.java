@@ -67,7 +67,9 @@ public class TCP {
 
 	public String escuchar() {
         try {
-            Paquete p = Paquete.JSONstrToObj(in.readLine());
+            String temp = in.readLine();
+            System.out.println(temp);
+            Paquete p = Paquete.JSONstrToObj(temp);
             if (p.getTipo_operacion()==4) {
                 return p.getMensaje();
             }

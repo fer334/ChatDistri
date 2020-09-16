@@ -110,12 +110,14 @@ public class TCPServerHilo extends Thread {
             System.out.println("Antes del while");
             enLlamada=true;
             while (enLlamada) {
+                System.out.println("Al entrar al while");
                 String entrada = this.in.readLine();
                 Paquete pentrada = Paquete.JSONstrToObj(entrada);
                 if (pentrada.getTipo_operacion()==3) {
                     Paquete p = new Paquete(0, pentrada.getMensaje(), 4);
                     servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
                 }
+                System.out.println("Al salir del while");
             }
             // System.out.println("despues del enviar la salida al fer");
             // System.out.println("despues del enviar la salida al otro");

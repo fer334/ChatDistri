@@ -89,10 +89,19 @@ public class UDP extends Thread{
                     Paquete respuesta = new Paquete(0, usuarios, 0);
                     enviarPaquete(serverSocket, cliente, respuesta);
                 } else if (p.getTipo_operacion() == 5) {
-                    System.out.println("Llamada terminada");
+                    System.out.println("Antes del for");
                     for (TCPServerHilo c : server.hilosClientes) {
-                        if(c.cliente.getUsername()==p.getMensaje()){
+                        System.out.println(c.cliente.getUsername());
+                        System.out.println(p.getMensaje());
+                        if(c.cliente.getUsername().equals(p.getMensaje())){
+                            System.out.println("La llamada esta: "+c.enLlamada);
                             c.enLlamada=false;
+                            //envio un paquete null para indicar la terminacion de paquete
+                            c.out.println((new Paquete(0, "", 5)).JSONToString());
+                            
+                            // Respondo al cliente
+                            Paquete respuesta = new Paquete(0, "ok", 0);
+                            enviarPaquete(serverSocket, cliente, respuesta);
                             break;
                         }
                     }
