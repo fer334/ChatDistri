@@ -16,10 +16,10 @@ public class TCPServerHilo extends Thread {
     BufferedReader in;
     Cliente cliente;
 
-    TCP servidor;
-    private boolean enLlamada;
+    Server servidor;
+    public boolean enLlamada;
 
-    public TCPServerHilo(Socket socket, TCP servidor) {
+    public TCPServerHilo(Socket socket, Server servidor) {
         super("TCPServerHilo");
         this.socket = socket;
         this.servidor = servidor;

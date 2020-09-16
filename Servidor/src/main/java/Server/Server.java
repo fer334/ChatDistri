@@ -4,22 +4,28 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 
-public class TCP {
+public class Server {
     boolean listening= true;
-    ArrayList<Cliente> clientesEnLinea;
+    ArrayList<Cliente> clientesEnLinea = new ArrayList<>();
     ArrayList<TCPServerHilo> hilosClientes = new ArrayList<>();
+    private int puertoServidor;
 
 
-    public TCP(ArrayList<Cliente> clientes) {
-        this.clientesEnLinea = clientes;
+    public Server(int puertoServidor) {
+        this.puertoServidor =puertoServidor;
 	}
 
 
 	public void ejecutar() {
+
+
+        UDP udp = new UDP(puertoServidor, this);
+        udp.start();
+
         ServerSocket serverSocket = null;
 
         try {
-            serverSocket = new ServerSocket(4444);
+            serverSocket = new ServerSocket(puertoServidor);
             System.out.println("Esperando cliente tcp");
             while (listening) {
     

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
@@ -11,22 +12,28 @@ import org.json.simple.parser.ParseException;
 
 public class UDP {
 
-    String direccionServidor ;
-    int puertoServidor ;
+    String direccionServidor;
+    int puertoServidor;
+    DatagramSocket clientSocket;
 
     public UDP(String direccionServidor, int puertoServidor) {
         this.direccionServidor = direccionServidor;
         this.puertoServidor = puertoServidor;
+        try {
+            clientSocket = new DatagramSocket();
+        } catch (SocketException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     // Metodo que envia un paquete y recibe una respuesta del servidor
-    public Paquete enviarPaquete(Paquete peticion) throws ParseException {
+    public Paquete enviarPaquete(Paquete peticion) {
         Paquete respuesta=null;
         try {
-            DatagramSocket clientSocket = new DatagramSocket();
-
             InetAddress IPAddress = InetAddress.getByName(direccionServidor);
             System.out.println("Intentando conectar a = " + IPAddress + ":" + puertoServidor + " via UDP...");
+
 
             byte[] sendData = new byte[1024];
             byte[] receiveData = new byte[1024];
@@ -72,4 +79,9 @@ public class UDP {
         }
         return respuesta;
     }
+
+	public void terminar(String nick_usuario) {
+        Paquete paquete = new Paquete(0, nick_usuario, 5);
+        enviarPaquete(paquete);
+	}
 }

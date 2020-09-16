@@ -11,10 +11,10 @@ import Client.Paquete;
 public class UDP extends Thread{
     private int puertoServidor;
     private ArrayList<Paquete> paquetes = new ArrayList<Paquete>();
-    private ArrayList<Cliente> clientes;
+    private Server server;
 
-    public UDP(int puertoServidor, ArrayList<Cliente> clientes){
-        this.clientes = clientes;
+    public UDP(int puertoServidor, Server s){
+        this.server=s;
         this.puertoServidor = puertoServidor;
     }
     
@@ -64,30 +64,38 @@ public class UDP extends Thread{
                 System.out.println("Operacion: " + p.getTipo_operacion());
 
                 // Operacion de conexion al servidor
-                if (p.getTipo_operacion() == 0) {
-                    boolean error=false;
-                    for (Cliente c : clientes) {
-                        if (c.getUsername().equals( cliente.getUsername())) {
-                            error=true;
-                            enviarPaquete(serverSocket, cliente, new Paquete(100, "El usuario ya existe", 0));
-                            break;
+                // if (p.getTipo_operacion() == 0) {
+                //     boolean error=false;
+                //     for (Cliente c : server.clientesEnLinea) {
+                //         if (c.getUsername().equals( cliente.getUsername())) {
+                //             error=true;
+                //             enviarPaquete(serverSocket, cliente, new Paquete(100, "El usuario ya existe", 0));
+                //             break;
 
-                        }
-                    }
-                    if(!error){
-                        clientes.add(cliente);
-                        enviarPaquete(serverSocket, cliente, new Paquete(0, "", 0));
+                //         }
+                //     }
+                //     if(!error){
+                //         clientes.add(cliente);
+                //         enviarPaquete(serverSocket, cliente, new Paquete(0, "", 0));
 
-                    }
-                }
+                //     }
+                // }
                 // Operacion ver clientes conectados
-                else if (p.getTipo_operacion() == 1) {
+                if (p.getTipo_operacion() == 1) {
                     ArrayList<String> usuarios = new ArrayList<>();
-                    for (Cliente c : clientes) {
+                    for (Cliente c : server.clientesEnLinea) {
                         usuarios.add(c.getUsername());
                     }
                     Paquete respuesta = new Paquete(0, usuarios, 0);
                     enviarPaquete(serverSocket, cliente, respuesta);
+                } else if (p.getTipo_operacion() == 5) {
+                    System.out.println("Llamada terminada");
+                    for (TCPServerHilo c : server.hilosClientes) {
+                        if(c.cliente.getUsername()==p.getMensaje()){
+                            c.enLlamada=false;
+                            break;
+                        }
+                    }
                 }
 
                 // Enviamos la respuesta inmediatamente a ese mismo cliente
