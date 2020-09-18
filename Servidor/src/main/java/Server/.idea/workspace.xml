@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bf936b09-66ac-45f8-88d4-a51290f08272" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/src/main/java/Client/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/src/main/java/Client/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/src/main/java/Client/Paquete.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/src/main/java/Client/Paquete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/src/main/java/Client/TCP.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/src/main/java/Client/TCP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/src/main/java/Client/UDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/src/main/java/Client/UDP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/target/Cliente-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/target/Cliente-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/target/surefire-reports/Client.AppTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/target/surefire-reports/Client.AppTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/target/surefire-reports/TEST-Client.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Cliente/target/surefire-reports/TEST-Client.AppTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/target/surefire/surefire2274132073492288120tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/target/surefire/surefire_03017682954645205756tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Cliente/target/surefire/surefirebooter3587121717086231927.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TCPServerHilo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TCPServerHilo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/UDP.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1hhIjvtp74sHVakkeqAzcXyYAm7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RunManager">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.App" />
+      <module name="Server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bf936b09-66ac-45f8-88d4-a51290f08272" name="Default Changelist" comment="" />
+      <created>1600457036028</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600457036028</updated>
+      <workItem from="1600457037242" duration="34000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

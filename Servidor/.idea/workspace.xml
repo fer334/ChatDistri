@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2a042935-0d6d-478b-8f68-9125deeff934" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/Cliente-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/Cliente-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/LaminaMarcoCliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/MarcoCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/MarcoCliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/Paquete.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/Paquete.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/TCP.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/TCP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/classes/Client/UDP.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/classes/Client/UDP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/surefire-reports/Client.AppTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/surefire-reports/Client.AppTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/surefire-reports/TEST-Client.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/surefire-reports/TEST-Client.AppTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/surefire/surefire2274132073492288120tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/surefire/surefire_03017682954645205756tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/surefire/surefirebooter3587121717086231927.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cliente/target/test-classes/Client/AppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Cliente/target/test-classes/Client/AppTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/TCPServerHilo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/TCPServerHilo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Server/UDP.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/UDP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Server/AppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Server/AppTest.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1hfVAeD6X1wUGV98z2R9BXqZnfr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.App" />
+      <module name="Servidor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Servidor-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/Servidor-1.0-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+        <item itemvalue="JAR Application.Servidor-1.0-SNAPSHOT.jar" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2a042935-0d6d-478b-8f68-9125deeff934" name="Default Changelist" comment="" />
+      <created>1600401991801</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600401991801</updated>
+      <workItem from="1600401999511" duration="1702000" />
+      <workItem from="1600418174543" duration="1221000" />
+      <workItem from="1600454810039" duration="974000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="418" y="177" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600402022228">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="418" y="177" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600402022228" />
+    <state x="743" y="277" width="424" height="479" key="FileChooserDialogImpl" timestamp="1600403948598">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="743" y="277" width="424" height="479" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1600403948598" />
+    <state width="1878" height="276" key="GridCell.Tab.0.bottom" timestamp="1600419524466">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="276" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600419524466" />
+    <state width="1878" height="276" key="GridCell.Tab.0.center" timestamp="1600419524465">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="276" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600419524465" />
+    <state width="1878" height="276" key="GridCell.Tab.0.left" timestamp="1600419524464">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="276" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600419524464" />
+    <state width="1878" height="276" key="GridCell.Tab.0.right" timestamp="1600419524465">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="276" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600419524465" />
+  </component>
+</project>
