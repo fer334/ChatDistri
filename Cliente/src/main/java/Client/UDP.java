@@ -39,7 +39,7 @@ public class UDP {
             byte[] receiveData = new byte[1024];
 
             // Creamos un paquete para conectarse al servidor
-            
+
             sendData = peticion.JSONToString().getBytes();
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, puertoServidor);
 
@@ -69,7 +69,7 @@ public class UDP {
             } catch (SocketTimeoutException ste) {
 
                 System.err.println("TimeOut: El paquete udp se asume perdido.");
-                
+
             }
             clientSocket.close();
         } catch (UnknownHostException ex) {

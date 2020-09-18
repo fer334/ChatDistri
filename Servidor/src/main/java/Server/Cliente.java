@@ -18,9 +18,9 @@ public class Cliente {
         this.port = port;
         this.username = username;
     }
-    
+
 	public Cliente(SocketAddress addr, int port, String username) {
-        
+
         this.direccion = addr.toString().split(":")[0].split("/")[1];
         this.port = port;
         this.username = username;
@@ -101,5 +101,5 @@ public class Cliente {
         return r;
 	}
 
-    
+
 }

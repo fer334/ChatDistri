@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Client.AppTest" time="0.025" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Client.AppTest" time="0.02" tests="1" errors="0" skipped="0" failures="0">
   <properties>
+    <property name="sun.desktop" value="gnome"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
-    <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="java.specification.version" value="1.8"/>
+    <property name="java.specification.version" value="11"/>
     <property name="sun.cpu.isalist" value=""/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/home/fer/Documentos/sem1_2020/Distri/tp/ChatDistri/Cliente/target/test-classes:/home/fer/Documentos/sem1_2020/Distri/tp/ChatDistri/Cliente/target/classes:/home/fer/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:/home/fer/.m2/repository/junit/junit/4.10/junit-4.10.jar:/home/fer/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:"/>
-    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.class.path" value="/home/giuli/tpdistribuidos/ChatDistri/Cliente/target/test-classes:/home/giuli/tpdistribuidos/ChatDistri/Cliente/target/classes:/home/giuli/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:/home/giuli/.m2/repository/junit/junit/4.10/junit-4.10.jar:/home/giuli/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:"/>
+    <property name="java.vm.vendor" value="Ubuntu"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="java.vendor.url" value="https://ubuntu.com/"/>
     <property name="user.timezone" value=""/>
-    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="java.vm.specification.version" value="11"/>
     <property name="os.name" value="Linux"/>
-    <property name="user.country" value="PY"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-jdk/jre/lib/amd64"/>
-    <property name="sun.java.command" value="/home/fer/Documentos/sem1_2020/Distri/tp/ChatDistri/Cliente/target/surefire/surefirebooter3587121717086231927.jar /home/fer/Documentos/sem1_2020/Distri/tp/ChatDistri/Cliente/target/surefire 2020-09-14T02-35-38_543-jvmRun1 surefire2274132073492288120tmp surefire_03017682954645205756tmp"/>
-    <property name="surefire.test.class.path" value="/home/fer/Documentos/sem1_2020/Distri/tp/ChatDistri/Cliente/target/test-classes:/home/fer/Documentos/sem1_2020/Distri/tp/ChatDistri/Cliente/target/classes:/home/fer/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:/home/fer/.m2/repository/junit/junit/4.10/junit-4.10.jar:/home/fer/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-amd64/lib"/>
+    <property name="sun.java.command" value="/home/giuli/tpdistribuidos/ChatDistri/Cliente/target/surefire/surefirebooter10834286127682562491.jar /home/giuli/tpdistribuidos/ChatDistri/Cliente/target/surefire 2020-09-17T23-54-02_032-jvmRun1 surefire3354906152863512696tmp surefire_016138677779139750299tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/home/giuli/tpdistribuidos/ChatDistri/Cliente/target/test-classes:/home/giuli/tpdistribuidos/ChatDistri/Cliente/target/classes:/home/giuli/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:/home/giuli/.m2/repository/junit/junit/4.10/junit-4.10.jar:/home/giuli/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="/home/fer"/>
-    <property name="user.language" value="es"/>
+    <property name="user.home" value="/home/giuli"/>
+    <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.home" value="/usr/lib/jvm/java-8-jdk/jre"/>
-    <property name="basedir" value="/home/fer/Documentos/sem1_2020/Distri/tp/ChatDistri/Cliente"/>
+    <property name="java.version.date" value="2020-01-14"/>
+    <property name="java.home" value="/usr/lib/jvm/java-11-openjdk-amd64"/>
     <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/giuli/tpdistribuidos/ChatDistri/Cliente"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="line.separator" value="&#10;"/>
-    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/home/fer/Documentos/sem1_2020/Distri/tp/ChatDistri/Cliente/target/surefire/surefirebooter3587121717086231927.jar"/>
-    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-8-jdk/jre/lib/resources.jar:/usr/lib/jvm/java-8-jdk/jre/lib/rt.jar:/usr/lib/jvm/java-8-jdk/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-jdk/jre/lib/jsse.jar:/usr/lib/jvm/java-8-jdk/jre/lib/jce.jar:/usr/lib/jvm/java-8-jdk/jre/lib/charsets.jar:/usr/lib/jvm/java-8-jdk/jre/lib/jfr.jar:/usr/lib/jvm/java-8-jdk/jre/classes"/>
+    <property name="surefire.real.class.path" value="/home/giuli/tpdistribuidos/ChatDistri/Cliente/target/surefire/surefirebooter10834286127682562491.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="1.8.0_251-b08"/>
-    <property name="user.name" value="fer"/>
+    <property name="java.runtime.version" value="11.0.6+10-post-Ubuntu-1ubuntu118.04.1"/>
+    <property name="user.name" value="giuli"/>
     <property name="path.separator" value=":"/>
-    <property name="os.version" value="5.8.3-arch1-1"/>
-    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-jdk/jre/lib/endorsed"/>
-    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="os.version" value="5.0.0-32-generic"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="localRepository" value="/home/fer/.m2/repository"/>
-    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/giuli/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-lts"/>
     <property name="java.io.tmpdir" value="/tmp"/>
-    <property name="java.version" value="1.8.0_251"/>
-    <property name="user.dir" value="/home/fer/Documentos/sem1_2020/Distri/tp/ChatDistri/Cliente"/>
+    <property name="java.version" value="11.0.6"/>
+    <property name="user.dir" value="/home/giuli/tpdistribuidos/ChatDistri/Cliente"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
     <property name="sun.os.patch.level" value="unknown"/>
-    <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="java.vendor" value="Ubuntu"/>
     <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="25.251-b08"/>
-    <property name="java.ext.dirs" value="/usr/lib/jvm/java-8-jdk/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="java.vm.version" value="11.0.6+10-post-Ubuntu-1ubuntu118.04.1"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="java.class.version" value="52.0"/>
+    <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="Client.AppTest" time="0.003"/>
+  <testcase name="shouldAnswerWithTrue" classname="Client.AppTest" time="0.001"/>
 </testsuite>

@@ -9,15 +9,15 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- * 
+ *
  * Clase que sirve para enviar paquetes entre el servidor y el cliente
  * tipo_operacion 0 pedir conectarse ingresando el nombre de usuario que va utilizar
  * tipo_operacion 1 pedir lista de usuarios conectados
  * tipo_operacion 2 pedir conectar llamada con usuario especifico
  * tipo_operacion 3 enviar mensaje dentro de llamada
  * tipo_operacion 4 recibir mensaje dentro de llamada
- * tipo_operacion 5 terminar llamada 
- * 
+ * tipo_operacion 5 terminar llamada
+ *
  */
 public class Paquete {
     private Integer estado,tipo_operacion;
@@ -92,11 +92,11 @@ public class Paquete {
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(str.trim());
             JSONObject jsonObject = (JSONObject) obj;
-            
+
             Integer estado = ((Long) jsonObject.get("estado")).intValue();
             String mensaje = (String) jsonObject.get("mensaje");
             Integer tipo_operacion = ((Long) jsonObject.get("tipo_operacion")).intValue();
-            
+
             Paquete r= new Paquete(estado, mensaje, tipo_operacion);
 
             // Si tiene el algo en el campo otro...
@@ -109,7 +109,7 @@ public class Paquete {
                 }
                 r.setOtro(temp);
             }
-    
+
             return r;
 
         } catch (ParseException e) {

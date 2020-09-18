@@ -16,7 +16,7 @@ public class TCP {
         try {
             unSocket = new Socket(dir, port);
             out = new PrintWriter(unSocket.getOutputStream(), true);
-    
+
             // viene del servidor
             in = new BufferedReader(new InputStreamReader(unSocket.getInputStream()));
         } catch (IOException e) {
@@ -25,7 +25,7 @@ public class TCP {
         }
         // enviamos nosotros
     }
-    
+
     void conectarse(String username) {
 
         // escribimos al servidor nuestro nombre de usuario
@@ -37,7 +37,7 @@ public class TCP {
         Paquete paquete = new Paquete(0, usuario, 2);
         out.println(paquete.JSONToString());
     }
-    
+
 
 	public void recibirLlamada() {
         String fromServer;

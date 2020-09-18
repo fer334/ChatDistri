@@ -17,7 +17,7 @@ public class UDP extends Thread{
         this.server=s;
         this.puertoServidor = puertoServidor;
     }
-    
+
     public void run(){
         try {
             // 1) Creamos el socket Servidor de Datagramas (UDP)
@@ -63,24 +63,6 @@ public class UDP extends Thread{
                 System.out.println("Recibo: " + datoRecibido);
                 System.out.println("Operacion: " + p.getTipo_operacion());
 
-                // Operacion de conexion al servidor
-                // if (p.getTipo_operacion() == 0) {
-                //     boolean error=false;
-                //     for (Cliente c : server.clientesEnLinea) {
-                //         if (c.getUsername().equals( cliente.getUsername())) {
-                //             error=true;
-                //             enviarPaquete(serverSocket, cliente, new Paquete(100, "El usuario ya existe", 0));
-                //             break;
-
-                //         }
-                //     }
-                //     if(!error){
-                //         clientes.add(cliente);
-                //         enviarPaquete(serverSocket, cliente, new Paquete(0, "", 0));
-
-                //     }
-                // }
-                // Operacion ver clientes conectados
                 if (p.getTipo_operacion() == 1) {
                     ArrayList<String> usuarios = new ArrayList<>();
                     for (Cliente c : server.clientesEnLinea) {
@@ -97,15 +79,6 @@ public class UDP extends Thread{
                         }
                     }
                 }
-
-                // Enviamos la respuesta inmediatamente a ese mismo cliente
-                // Es no bloqueante
-                // sendData = PersonaJSON.objetoString(p).getBytes();
-                // DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length,
-                // IPAddress, port);
-
-                // serverSocket.send(sendPacket);
-
             }
 
         } catch (Exception ex) {
