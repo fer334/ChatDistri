@@ -116,6 +116,8 @@ public class TCPServerHilo extends Thread {
                 if (pentrada.getTipo_operacion()==3) {
                     Paquete p = new Paquete(0, pentrada.getMensaje(), 4);
                     servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
+                }else if (pentrada.getTipo_operacion()==5) {
+                   break;
                 }
                 System.out.println("Al salir del while");
             }

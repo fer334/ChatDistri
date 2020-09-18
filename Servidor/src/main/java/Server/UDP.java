@@ -96,10 +96,10 @@ public class UDP extends Thread{
                         if(c.cliente.getUsername().equals(p.getMensaje())){
                             System.out.println("La llamada esta: "+c.enLlamada);
                             c.enLlamada=false;
-                            //envio un paquete null para indicar la terminacion de paquete
+                            //envio un paquete null para indicar terminacion de paquete
                             c.out.println((new Paquete(0, "", 5)).JSONToString());
-                            
-                            // Respondo al cliente
+                            System.out.println("La llamada esta: "+c.enLlamada);
+                            // Repuesta al paquete udp
                             Paquete respuesta = new Paquete(0, "ok", 0);
                             enviarPaquete(serverSocket, cliente, respuesta);
                             break;

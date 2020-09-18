@@ -153,6 +153,9 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         ip.addItem("u");
         ip.addItem("ali");
         ip.addItem("fer");
+
+        //TODO agregar usuarios del servidor
+
         // ip.addItem("192.168.100.46");//ip de la vm Xubuntu
         // ip.addItem("");//ip de la vm Ubuntu Mate
 
@@ -162,7 +165,6 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 
         miboton = new JButton("Enviar"); // boton para enviar el texto escrito
         JButton terminar = new JButton("Terminar llamada"); // boton para enviar el texto escrito
-        JButton a = new JButton("a"); // boton para enviar el texto escrito
 
         miboton.addActionListener(new ActionListener() {
             @Override
@@ -176,12 +178,6 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             public void actionPerformed(ActionEvent e) {
                 System.out.println("enviando mensaje de terminar");
                 udp.terminar(nick_usuario);
-            }
-        });
-        a.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tcp.realizarLlamada("a");
             }
         });
 
@@ -203,7 +199,6 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         add(campo1); // se agrega el campo de texto a la lamina(interfaz)
         add(miboton);// se grega el boton a la lamina(interfaz)
         add(terminar);
-        add(a);
         
         Thread mihilo = new Thread(this);
         
