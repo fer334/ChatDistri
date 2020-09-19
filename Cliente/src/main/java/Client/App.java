@@ -57,6 +57,15 @@ class MarcoCliente extends JFrame {
         add(milamina);
 
         setVisible(true);
+        this.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                System.out.println("Closed");
+                milamina.tcp.terminar(milamina.getNick());
+                e.getWindow().dispose();
+            }
+        });
 
     }
 
@@ -71,6 +80,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
                                   // llevando a cabo la conversacion
     private JTextArea campochat;// area de chat
     private JButton miboton; // boton para enviar mensajes
+    private String nickuser;
     TCP tcp;
     UDP udp;
 
@@ -78,6 +88,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         this.tcp = tcp;
         this.udp = udp;
         String nick_usuario = JOptionPane.showInputDialog("Ingrese su Ni:");
+        nickuser = nick_usuario;
         
 
         JLabel n_nick = new JLabel("Nick:");
@@ -134,7 +145,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 				
 			}
         });
-
+        
         /*ip.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -144,6 +155,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 
             }
         });*/
+        
 
         add(n_nick);
         add(nick);
@@ -160,6 +172,10 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 
         mihilo.start();
 
+    }
+    
+    public String getNick() {
+    	return this.nickuser;
     }
 
     @Override
