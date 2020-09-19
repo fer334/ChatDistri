@@ -71,6 +71,7 @@ public class UDP extends Thread{
                     }
                     Paquete respuesta = new Paquete(0, usuarios, 0);
                     enviarPaquete(serverSocket, cliente, respuesta);
+                }
             }
 
         } catch (Exception ex) {
