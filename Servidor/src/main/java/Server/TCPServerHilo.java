@@ -95,6 +95,9 @@ public class TCPServerHilo extends Thread {
                     Paquete p = new Paquete(0, pentrada.getMensaje(), 4, pentrada.getSender());
                     servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
                     servidor.hilosClientes.get(posHiloCliente2).out.flush();
+                }else if(pentrada.getTipo_operacion()==5) {
+                	System.out.println("Terminando llamada");
+                    this.enLlamada = false;
                 }
             }
             System.out.println("While de llamada finalizado");
