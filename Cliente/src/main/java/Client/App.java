@@ -105,6 +105,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             public void actionPerformed(ActionEvent e) {
                 campochat.append(campo1.getText() + "\n");
                 tcp.enviar(campo1.getText(), nick_usuario);
+                campo1.setText("");
             }
         });
         terminar.addActionListener(new ActionListener() {
