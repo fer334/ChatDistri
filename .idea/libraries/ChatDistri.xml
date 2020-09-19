@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="ChatDistri">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/Cliente/src/main/java" />
+      <root url="file://$PROJECT_DIR$/Cliente/src/test/java" />
+      <root url="file://$PROJECT_DIR$/Servidor/src/main/java" />
+      <root url="file://$PROJECT_DIR$/Servidor/src/test/java" />
+    </SOURCES>
+  </library>
+</component>

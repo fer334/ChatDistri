@@ -7,6 +7,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import org.json.simple.parser.ParseException;
 
@@ -39,7 +40,7 @@ public class UDP {
             byte[] receiveData = new byte[1024];
 
             // Creamos un paquete para conectarse al servidor
-            
+
             sendData = peticion.JSONToString().getBytes();
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, puertoServidor);
 
@@ -69,9 +70,9 @@ public class UDP {
             } catch (SocketTimeoutException ste) {
 
                 System.err.println("TimeOut: El paquete udp se asume perdido.");
-                
+
             }
-            clientSocket.close();
+            //clientSocket.close();
         } catch (UnknownHostException ex) {
             System.err.println(ex);
         } catch (IOException ex) {
@@ -79,9 +80,17 @@ public class UDP {
         }
         return respuesta;
     }
+    
+    public ArrayList<String> getClientesOnline() {
+    	Paquete p = new Paquete(0, " ", 1, null);
+    	Paquete r = this.enviarPaquete(p);
+    	return r.getOtro();
+    	
+    }
+    
 
 	public void terminar(String nick_usuario) {
-        Paquete paquete = new Paquete(0, nick_usuario, 5);
+        Paquete paquete = new Paquete(0, nick_usuario, 5, null);
         enviarPaquete(paquete);
 	}
 }

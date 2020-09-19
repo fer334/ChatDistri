@@ -12,16 +12,17 @@ public class UDP extends Thread{
     private int puertoServidor;
     private ArrayList<Paquete> paquetes = new ArrayList<Paquete>();
     private Server server;
+    DatagramSocket serverSocket;
 
     public UDP(int puertoServidor, Server s){
         this.server=s;
         this.puertoServidor = puertoServidor;
     }
-    
+
     public void run(){
         try {
             // 1) Creamos el socket Servidor de Datagramas (UDP)
-            DatagramSocket serverSocket = new DatagramSocket(puertoServidor);
+        	serverSocket = new DatagramSocket(puertoServidor);
             System.out.println("Servidor Sistemas Distribuidos - UDP ");
 
             // 2) buffer de datos a enviar y recibir
@@ -63,24 +64,6 @@ public class UDP extends Thread{
                 System.out.println("Recibo: " + datoRecibido);
                 System.out.println("Operacion: " + p.getTipo_operacion());
 
-                // Operacion de conexion al servidor
-                // if (p.getTipo_operacion() == 0) {
-                //     boolean error=false;
-                //     for (Cliente c : server.clientesEnLinea) {
-                //         if (c.getUsername().equals( cliente.getUsername())) {
-                //             error=true;
-                //             enviarPaquete(serverSocket, cliente, new Paquete(100, "El usuario ya existe", 0));
-                //             break;
-
-                //         }
-                //     }
-                //     if(!error){
-                //         clientes.add(cliente);
-                //         enviarPaquete(serverSocket, cliente, new Paquete(0, "", 0));
-
-                //     }
-                // }
-                // Operacion ver clientes conectados
                 if (p.getTipo_operacion() == 1) {
                     ArrayList<String> usuarios = new ArrayList<>();
                     for (Cliente c : server.clientesEnLinea) {
@@ -88,33 +71,6 @@ public class UDP extends Thread{
                     }
                     Paquete respuesta = new Paquete(0, usuarios, 0);
                     enviarPaquete(serverSocket, cliente, respuesta);
-                } else if (p.getTipo_operacion() == 5) {
-                    System.out.println("Antes del for");
-                    for (TCPServerHilo c : server.hilosClientes) {
-                        System.out.println(c.cliente.getUsername());
-                        System.out.println(p.getMensaje());
-                        if(c.cliente.getUsername().equals(p.getMensaje())){
-                            System.out.println("La llamada esta: "+c.enLlamada);
-                            c.enLlamada=false;
-                            //envio un paquete null para indicar terminacion de paquete
-                            c.out.println((new Paquete(0, "", 5)).JSONToString());
-                            System.out.println("La llamada esta: "+c.enLlamada);
-                            // Repuesta al paquete udp
-                            Paquete respuesta = new Paquete(0, "ok", 0);
-                            enviarPaquete(serverSocket, cliente, respuesta);
-                            break;
-                        }
-                    }
-                }
-
-                // Enviamos la respuesta inmediatamente a ese mismo cliente
-                // Es no bloqueante
-                // sendData = PersonaJSON.objetoString(p).getBytes();
-                // DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length,
-                // IPAddress, port);
-
-                // serverSocket.send(sendPacket);
-
             }
 
         } catch (Exception ex) {
@@ -123,7 +79,7 @@ public class UDP extends Thread{
         }
     }
 
-    private static void enviarPaquete(DatagramSocket serverSocket, Cliente cliente, Paquete respuesta) {
+    private void enviarPaquete(DatagramSocket serverSocket, Cliente cliente, Paquete respuesta) {
         byte[] sendData = new byte[1024];
         sendData = respuesta.JSONToString().getBytes();
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, cliente.getIPAddress(),
