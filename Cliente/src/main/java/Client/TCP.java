@@ -29,18 +29,18 @@ public class TCP {
     void conectarse(String username) {
 
         // escribimos al servidor nuestro nombre de usuario
-        Paquete p = new Paquete(0, username, 0);
+        Paquete p = new Paquete(0, username, 0, null);
         out.println(p.JSONToString());
     }
 
 	public void realizarLlamada(String usuario) {
-        Paquete paquete = new Paquete(0, usuario, 2);
+        Paquete paquete = new Paquete(0, usuario, 2, null);
         out.println(paquete.JSONToString());
         out.flush();
     }
 	
 	public void terminar(String nick_usuario) {
-        Paquete paquete = new Paquete(0, nick_usuario, 5);
+        Paquete paquete = new Paquete(0, nick_usuario, 5, null);
         out.println(paquete.JSONToString());
         out.flush();
 	}
@@ -76,7 +76,7 @@ public class TCP {
         try {
             Paquete p = Paquete.JSONstrToObj(in.readLine());
             if (p.getTipo_operacion()==4) {
-                return p.getMensaje();
+                return p.getSender()+": "+p.getMensaje();
             }
             return "";
         } catch (IOException e) {
@@ -86,8 +86,8 @@ public class TCP {
         }
 	}
 
-	public void enviar(String text) {
-        Paquete paquete = new Paquete(0,text,3);
+	public void enviar(String text, String sender) {
+        Paquete paquete = new Paquete(0,text,3, sender);
         out.println(paquete.JSONToString());
 	}
 }

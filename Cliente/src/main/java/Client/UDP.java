@@ -82,7 +82,7 @@ public class UDP {
     }
     
     public ArrayList<String> getClientesOnline() {
-    	Paquete p = new Paquete(0, " ", 1);
+    	Paquete p = new Paquete(0, " ", 1, null);
     	Paquete r = this.enviarPaquete(p);
     	return r.getOtro();
     	
@@ -90,7 +90,7 @@ public class UDP {
     
 
 	public void terminar(String nick_usuario) {
-        Paquete paquete = new Paquete(0, nick_usuario, 5);
+        Paquete paquete = new Paquete(0, nick_usuario, 5, null);
         enviarPaquete(paquete);
 	}
 }

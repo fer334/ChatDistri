@@ -104,7 +104,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             @Override
             public void actionPerformed(ActionEvent e) {
                 campochat.append(campo1.getText() + "\n");
-                tcp.enviar(campo1.getText());
+                tcp.enviar(campo1.getText(), nick_usuario);
             }
         });
         terminar.addActionListener(new ActionListener() {
@@ -117,7 +117,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         llamarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tcp.realizarLlamada("a");
+                tcp.realizarLlamada(ip.getSelectedItem().toString());
             }
         });
         
