@@ -9,6 +9,7 @@ import java.net.SocketAddress;
 
 import Client.Paquete;
 
+
 public class TCPServerHilo extends Thread {
 
     public Socket socket = null;
@@ -26,11 +27,10 @@ public class TCPServerHilo extends Thread {
     }
 
     public void run() {
-
         try {
             SocketAddress addr = socket.getRemoteSocketAddress();
             int port = socket.getPort();
-
+            
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
@@ -41,22 +41,38 @@ public class TCPServerHilo extends Thread {
 
                 // Vemos que codigo de operacion tiene
                 if (paquete.getTipo_operacion()==0) {
-                    Cliente e = new Cliente(addr, port, paquete.getMensaje());
+                	Cliente e = new Cliente(addr, port, paquete.getMensaje());
                     this.cliente = e;
                     servidor.clientesEnLinea.add(e);
                 }else if (paquete.getTipo_operacion() == 2) {
                     System.out.println("paquete recibido llamando a 2");
                     llamarA(paquete.getMensaje());
+                }else if(paquete.getTipo_operacion()==5) {
+                	System.out.println("Terminando llamada");
+                    this.enLlamada = false;
                 }
             }
 
             out.close();
             in.close();
+            for(int i=0; i< servidor.clientesEnLinea.size();i++) {
+            	System.out.println(servidor.clientesEnLinea.get(i).getPort() == socket.getPort());
+            	if(servidor.clientesEnLinea.get(i).getPort() == socket.getPort()) {
+            		System.out.println("Cliente "+servidor.clientesEnLinea.get(i).getUsername()+" fuera");
+            		servidor.clientesEnLinea.remove(i);
+            		break;
+            	}
+            }
+            
             socket.close();
+            
+            
+           
+            
             System.out.println("Finalizando Hilo");
-
-        } catch (IOException e) {
-            e.printStackTrace();
+           
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -81,6 +97,7 @@ public class TCPServerHilo extends Thread {
                     servidor.hilosClientes.get(posHiloCliente2).out.flush();
                 }
             }
+            System.out.println("While de llamada finalizado");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

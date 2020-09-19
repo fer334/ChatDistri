@@ -1,6 +1,5 @@
 package Client;
 
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -16,6 +15,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -89,9 +89,6 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         tcp.conectarse(nick_usuario);
 
         ip = new JComboBox<String>();// configuramos el cuadro de texto para que aparezca a la izquierda
-        ip.addItem("u");
-        ip.addItem("ali");
-        ip.addItem("fer");
         JButton refreshOnlines = new JButton("Reload");
         JButton llamarButton = new JButton("LLamar");
 
@@ -114,7 +111,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("enviando mensaje de terminar");
-                udp.terminar(nick_usuario);
+                tcp.terminar(nick_usuario);
             }
         });
         llamarButton.addActionListener(new ActionListener() {
@@ -123,8 +120,21 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
                 tcp.realizarLlamada("a");
             }
         });
+        
+        refreshOnlines.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ip.removeAllItems();
+				ArrayList<String> clientesOnline = udp.getClientesOnline();
+				for(int i=0; i<clientesOnline.size(); i++) {
+					System.out.println(clientesOnline.get(i));
+					ip.addItem(clientesOnline.get(i));
+				}
+				
+			}
+        });
 
-        ip.addItemListener(new ItemListener() {
+        /*ip.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -132,7 +142,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
                 }
 
             }
-        });
+        });*/
 
         add(n_nick);
         add(nick);

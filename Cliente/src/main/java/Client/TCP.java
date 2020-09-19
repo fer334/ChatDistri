@@ -36,7 +36,14 @@ public class TCP {
 	public void realizarLlamada(String usuario) {
         Paquete paquete = new Paquete(0, usuario, 2);
         out.println(paquete.JSONToString());
+        out.flush();
     }
+	
+	public void terminar(String nick_usuario) {
+        Paquete paquete = new Paquete(0, nick_usuario, 5);
+        out.println(paquete.JSONToString());
+        out.flush();
+	}
 
 
 	public void recibirLlamada() {

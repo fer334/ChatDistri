@@ -12,6 +12,7 @@ public class UDP extends Thread{
     private int puertoServidor;
     private ArrayList<Paquete> paquetes = new ArrayList<Paquete>();
     private Server server;
+    DatagramSocket serverSocket;
 
     public UDP(int puertoServidor, Server s){
         this.server=s;
@@ -21,7 +22,7 @@ public class UDP extends Thread{
     public void run(){
         try {
             // 1) Creamos el socket Servidor de Datagramas (UDP)
-            DatagramSocket serverSocket = new DatagramSocket(puertoServidor);
+        	serverSocket = new DatagramSocket(puertoServidor);
             System.out.println("Servidor Sistemas Distribuidos - UDP ");
 
             // 2) buffer de datos a enviar y recibir
@@ -70,7 +71,7 @@ public class UDP extends Thread{
                     }
                     Paquete respuesta = new Paquete(0, usuarios, 0);
                     enviarPaquete(serverSocket, cliente, respuesta);
-                } else if (p.getTipo_operacion() == 5) {
+                } /*else if (p.getTipo_operacion() == 5) {
                     System.out.println("Llamada terminada");
                     for (TCPServerHilo c : server.hilosClientes) {
                         if(c.cliente.getUsername()==p.getMensaje()){
@@ -78,7 +79,7 @@ public class UDP extends Thread{
                             break;
                         }
                     }
-                }
+                }*/
             }
 
         } catch (Exception ex) {
@@ -87,7 +88,7 @@ public class UDP extends Thread{
         }
     }
 
-    private static void enviarPaquete(DatagramSocket serverSocket, Cliente cliente, Paquete respuesta) {
+    private void enviarPaquete(DatagramSocket serverSocket, Cliente cliente, Paquete respuesta) {
         byte[] sendData = new byte[1024];
         sendData = respuesta.JSONToString().getBytes();
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, cliente.getIPAddress(),
