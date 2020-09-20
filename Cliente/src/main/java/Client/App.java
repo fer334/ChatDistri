@@ -90,7 +90,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         String nick_usuario = JOptionPane.showInputDialog("Ingrese su Ni:");
         nickuser = nick_usuario;
         
-
+        
         JLabel n_nick = new JLabel("Nick:");
         nick = new JLabel();
         nick.setText(nick_usuario);
@@ -105,7 +105,9 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 
 
         campochat = new JTextArea(12, 20);// lugar de colocacion del area de texto, las coordenadas son 12 y 20
-
+        campochat.setLineWrap(true);
+        campochat.setWrapStyleWord(true);
+        
         campo1 = new JTextField(20); // area donde se escribirá el mensaje a enviar
 
         miboton = new JButton("Enviar"); // boton para enviar el texto escrito
