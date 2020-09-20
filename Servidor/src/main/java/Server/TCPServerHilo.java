@@ -92,13 +92,14 @@ public class TCPServerHilo extends Thread {
                 System.out.println("Al entrar al while");
                 String entrada = this.in.readLine();
                 Paquete pentrada = Paquete.JSONstrToObj(entrada);
-                if (pentrada.getTipo_operacion()==3) {
+                if (enLlamada==true && pentrada.getTipo_operacion()==3) {
                     Paquete p = new Paquete(0, pentrada.getMensaje(), 4, pentrada.getSender());
                     servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
                     servidor.hilosClientes.get(posHiloCliente2).out.flush();
                 }else if(pentrada.getTipo_operacion()==5) {
-                	System.out.println("Terminando llamada");
+                    System.out.println("Terminando llamada");
                     this.enLlamada = false;
+                    servidor.hilosClientes.get(posHiloCliente2).enLlamada = false;
                 }
                 System.out.println("Al salir del while");
             }
