@@ -6,6 +6,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Image.*;
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +14,10 @@ import java.io.InputStreamReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URL.*;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
@@ -50,11 +54,12 @@ class MarcoCliente extends JFrame {
     public MarcoCliente(TCP tcp, UDP udp) {
         this.tcp = tcp;
         this.udp = udp;
-        setBounds(600, 300, 280, 350);
-
+        
         LaminaMarcoCliente milamina = new LaminaMarcoCliente(tcp, udp);
 
         add(milamina);
+        setDefaultCloseOperation(3);
+        setBounds(700, 300, 300, 500);
 
         setVisible(true);
         this.addWindowListener(new WindowAdapter(){
@@ -89,22 +94,32 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         this.udp = udp;
         String nick_usuario = JOptionPane.showInputDialog("Ingrese su Ni:");
         nickuser = nick_usuario;
+
+        setLayout(null);
         
-
-        JLabel n_nick = new JLabel("Nick:");
-        nick = new JLabel();
-        nick.setText(nick_usuario);
-
-        JLabel texto = new JLabel("En Linea:");
+        String entorno = "<html><body>Nick: "+nick_usuario+"<br><br>En Linea:</body></html>";
+        JLabel n_nick = new JLabel(entorno);
+      
 
         tcp.conectarse(nick_usuario);
 
         ip = new JComboBox<String>();// configuramos el cuadro de texto para que aparezca a la izquierda
-        JButton refreshOnlines = new JButton("Reload");
+        JButton refreshOnlines;
+        try{
+            refreshOnlines = new JButton(new ImageIcon(((new ImageIcon(
+                new URL("https://icons.iconarchive.com/icons/hopstarter/soft-scraps/24/Button-Refresh-icon.png"))
+                .getImage()
+                .getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH)))));
+            //refreshOnlines.setBorder(BorderFactory.createEmptyBorder());
+            refreshOnlines.setContentAreaFilled(false);;    
+           
+        }catch(MalformedURLException e){
+            refreshOnlines = new JButton("Refresh");
+            
+        }
         JButton llamarButton = new JButton("LLamar");
 
-
-        campochat = new JTextArea(12, 20);// lugar de colocacion del area de texto, las coordenadas son 12 y 20
+        campochat = new JTextArea();// lugar de colocacion del area de texto, las coordenadas son 12 y 20
 
         campo1 = new JTextField(20); // area donde se escribirá el mensaje a enviar
 
@@ -114,7 +129,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         miboton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                campochat.append(campo1.getText() + "\n");
+                campochat.append(nick_usuario+": "+campo1.getText() + "\n");
                 tcp.enviar(campo1.getText(), nick_usuario);
                 campo1.setText("");
             }
@@ -133,7 +148,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             }
         });
         
-        refreshOnlines.addActionListener(new ActionListener() {
+       refreshOnlines.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ip.removeAllItems();
@@ -145,7 +160,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 				
 			}
         });
-        
+     
         /*ip.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -156,10 +171,15 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             }
         });*/
         
-
+        n_nick.setBounds(10,10,100,60);
+        refreshOnlines.setBounds(160,40,40,30);
+        llamarButton.setBounds(160,75,80,25);
+        campochat.setBounds(10,105,265,240);
+        campo1.setBounds(10,350,185,20);
+        miboton.setBounds(200, 349, 80, 22);
+        ip.setBounds(65, 45, 80, 25);
+        terminar.setBounds(20, 380 , 250, 25);
         add(n_nick);
-        add(nick);
-        add(texto);
         add(ip); // agregamos el cuadro de texto a la lamina(interfaz)
         add(refreshOnlines);
         add(llamarButton);
@@ -182,12 +202,9 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
     public void run() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-            while(true){//el cliente se pone a la escucha
-
-
-                campochat.append(this.tcp.escuchar() + "\n");
-
-            }
+        while(true){//el cliente se pone a la escucha
+               campochat.append(this.tcp.escuchar() + "\n");
+        }
 
     }
 
