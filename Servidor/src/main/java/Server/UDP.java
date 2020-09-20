@@ -71,15 +71,7 @@ public class UDP extends Thread{
                     }
                     Paquete respuesta = new Paquete(0, usuarios, 0);
                     enviarPaquete(serverSocket, cliente, respuesta);
-                } /*else if (p.getTipo_operacion() == 5) {
-                    System.out.println("Llamada terminada");
-                    for (TCPServerHilo c : server.hilosClientes) {
-                        if(c.cliente.getUsername()==p.getMensaje()){
-                            c.enLlamada=false;
-                            break;
-                        }
-                    }
-                }*/
+                }
             }
 
         } catch (Exception ex) {

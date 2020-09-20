@@ -89,6 +89,7 @@ public class TCPServerHilo extends Thread {
             System.out.println("Antes del while");
             enLlamada=true;
             while (enLlamada) {
+                System.out.println("Al entrar al while");
                 String entrada = this.in.readLine();
                 Paquete pentrada = Paquete.JSONstrToObj(entrada);
                 if (pentrada.getTipo_operacion()==3) {
@@ -99,6 +100,7 @@ public class TCPServerHilo extends Thread {
                 	System.out.println("Terminando llamada");
                     this.enLlamada = false;
                 }
+                System.out.println("Al salir del while");
             }
             System.out.println("While de llamada finalizado");
         } catch (IOException e) {
