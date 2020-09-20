@@ -155,7 +155,10 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 				ArrayList<String> clientesOnline = udp.getClientesOnline();
 				for(int i=0; i<clientesOnline.size(); i++) {
 					System.out.println(clientesOnline.get(i));
-					ip.addItem(clientesOnline.get(i));
+                    if (!clientesOnline.get(i).equals(nick_usuario)) {
+                        ip.addItem(clientesOnline.get(i));    
+                    }
+                    
 				}
 				
 			}
