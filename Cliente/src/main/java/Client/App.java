@@ -83,7 +83,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
     private String nickuser;
     TCP tcp;
     UDP udp;
-
+    
     public LaminaMarcoCliente(TCP tcp, UDP udp) {
         this.tcp = tcp;
         this.udp = udp;
@@ -109,8 +109,11 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         campo1 = new JTextField(20); // area donde se escribirá el mensaje a enviar
 
         miboton = new JButton("Enviar"); // boton para enviar el texto escrito
+        
         JButton terminar = new JButton("Terminar llamada"); // boton para enviar el texto escrito
-
+        
+        terminar.setVisible(false);
+        
         miboton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,6 +125,8 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         terminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	terminar.setVisible(false);
+            	llamarButton.setVisible(true);
                 System.out.println("enviando mensaje de terminar");
                 tcp.terminar(nick_usuario);
             }
@@ -129,6 +134,8 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         llamarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	llamarButton.setVisible(false);
+            	terminar.setVisible(true);
                 tcp.realizarLlamada(ip.getSelectedItem().toString());
             }
         });
@@ -145,6 +152,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 				
 			}
         });
+        
         
         /*ip.addItemListener(new ItemListener() {
             @Override
