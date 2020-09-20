@@ -46,7 +46,7 @@ public class TCPServerHilo extends Thread {
                     servidor.clientesEnLinea.add(e);
                 }else if (paquete.getTipo_operacion() == 2) {
                     System.out.println("paquete recibido llamando a "+paquete.getMensaje());
-                    llamarA(paquete.getMensaje());
+                    llamarA(paquete.getMensaje(), paquete.getSender());
                 }else if(paquete.getTipo_operacion()==5) {
                 	System.out.println("Terminando llamada");
                     this.enLlamada = false;
@@ -76,10 +76,10 @@ public class TCPServerHilo extends Thread {
         }
     }
 
-    private void llamarA(String usuario) {
+    private void llamarA(String destino, String origen) {
         int posHiloCliente2 = 0;
         for (int i = 0; i < servidor.hilosClientes.size(); i++) {
-            if (servidor.hilosClientes.get(i).cliente.getUsername().equals(usuario)) {
+            if (servidor.hilosClientes.get(i).cliente.getUsername().equals(destino)) {
                 posHiloCliente2 = i;
                 break;
             }
@@ -88,17 +88,26 @@ public class TCPServerHilo extends Thread {
         try {
             System.out.println("Antes del while");
             enLlamada=true;
+            Paquete p;
+            if(origen != null) {
+            	p = new Paquete(0, "", 6, origen);
+                servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
+                servidor.hilosClientes.get(posHiloCliente2).out.flush();
+            }
             while (enLlamada) {
                 System.out.println("Al entrar al while");
                 String entrada = this.in.readLine();
                 Paquete pentrada = Paquete.JSONstrToObj(entrada);
                 if (enLlamada==true && pentrada.getTipo_operacion()==3) {
-                    Paquete p = new Paquete(0, pentrada.getMensaje(), 4, pentrada.getSender());
+                    p = new Paquete(0, pentrada.getMensaje(), 4, pentrada.getSender());
                     servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
                     servidor.hilosClientes.get(posHiloCliente2).out.flush();
                 }else if(pentrada.getTipo_operacion()==5) {
                     System.out.println("Terminando llamada");
                     this.enLlamada = false;
+                    p = new Paquete(0, pentrada.getMensaje(), 5, null);
+                    servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
+                    servidor.hilosClientes.get(posHiloCliente2).out.flush();
                     servidor.hilosClientes.get(posHiloCliente2).enLlamada = false;
                 }
                 System.out.println("Al salir del while");

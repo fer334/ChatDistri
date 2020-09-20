@@ -86,6 +86,8 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
     private JTextArea campochat;// area de chat
     private JButton miboton; // boton para enviar mensajes
     private String nickuser;
+    JButton llamarButton;
+    JButton terminar;
     TCP tcp;
     UDP udp;
 
@@ -116,7 +118,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             refreshOnlines = new JButton("Refresh");
 
         }
-        JButton llamarButton = new JButton("LLamar");
+        llamarButton = new JButton("LLamar");
 
 
         campochat = new JTextArea(12, 20);// lugar de colocacion del area de texto, las coordenadas son 12 y 20
@@ -126,7 +128,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 
         miboton = new JButton("Enviar"); // boton para enviar el texto escrito
 
-        JButton terminar = new JButton("Terminar llamada"); // boton para enviar el texto escrito
+        terminar = new JButton("Terminar llamada"); // boton para enviar el texto escrito
 
         terminar.setVisible(false);
 
@@ -152,7 +154,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             public void actionPerformed(ActionEvent e) {
             	llamarButton.setVisible(false);
             	terminar.setVisible(true);
-                tcp.realizarLlamada(ip.getSelectedItem().toString());
+                tcp.realizarLlamada(ip.getSelectedItem().toString(), nickuser);
             }
         });
 
@@ -171,12 +173,6 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 
 			}
         });
-<<<<<<< HEAD
-
-=======
-
-
->>>>>>> elias
         /*ip.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -219,7 +215,19 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
         while(true){//el cliente se pone a la escucha
-               campochat.append(this.tcp.escuchar() + "\n");
+            String mensaje = this.tcp.escuchar();
+            if(mensaje.equals("codellamada")) {
+            	llamarButton.setVisible(false);
+            	terminar.setVisible(true);
+            }else if(mensaje.equals("codeterminar")){
+            	terminar.setVisible(false);
+            	llamarButton.setVisible(true);
+                System.out.println("enviando mensaje de terminar");
+                tcp.terminar(nickuser);
+        	}else {
+            	campochat.append(mensaje + "\n");
+            }
+        	
         }
 
     }

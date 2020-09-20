@@ -33,8 +33,8 @@ public class TCP {
         out.println(p.JSONToString());
     }
 
-	public void realizarLlamada(String usuario) {
-        Paquete paquete = new Paquete(0, usuario, 2, null);
+	public void realizarLlamada(String destino, String origen) {
+        Paquete paquete = new Paquete(0, destino, 2, origen);
         out.println(paquete.JSONToString());
         out.flush();
     }
@@ -46,30 +46,8 @@ public class TCP {
 	}
 
 
-	public void recibirLlamada() {
-        String fromServer;
-        String fromUser;
-        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-
-        try {
-            while ((fromServer = in.readLine()) != null) {
-                System.out.println("Servidor: " + fromServer);
-                if (fromServer.equals("Bye")) {
-                    break;
-                }
-
-                fromUser = stdIn.readLine();
-                if (fromUser != null) {
-                    System.out.println("Cliente: " + fromUser);
-
-                    // escribimos al servidor
-                    out.println(fromUser);
-                }
-            }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+	public void recibirLlamada(String llamante) {
+        this.realizarLlamada(llamante, null);
 	}
 
 	public String escuchar() {
@@ -79,6 +57,11 @@ public class TCP {
             Paquete p = Paquete.JSONstrToObj(temp);
             if (p.getTipo_operacion()==4) {
                 return p.getSender()+": "+p.getMensaje();
+            }else if(p.getTipo_operacion()==6) {
+            	this.recibirLlamada(p.getSender());
+            	return "codellamada";
+            }else if(p.getTipo_operacion()==5) {
+            	return "codeterminar";
             }
             return "";
         } catch (IOException e) {
