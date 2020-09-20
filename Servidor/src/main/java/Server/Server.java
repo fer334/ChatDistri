@@ -28,12 +28,12 @@ public class Server {
             serverSocket = new ServerSocket(puertoServidor);
             System.out.println("Esperando cliente tcp");
             while (listening) {
-    
+
                 TCPServerHilo hilo = new TCPServerHilo(serverSocket.accept(), this);
                 hilosClientes.add(hilo);
                 hilo.start();
             }
-    
+
             serverSocket.close();
         } catch (IOException e) {
             System.err.println("No se puede abrir el puerto: 4444.");

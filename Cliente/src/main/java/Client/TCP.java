@@ -16,7 +16,7 @@ public class TCP {
         try {
             unSocket = new Socket(dir, port);
             out = new PrintWriter(unSocket.getOutputStream(), true);
-    
+
             // viene del servidor
             in = new BufferedReader(new InputStreamReader(unSocket.getInputStream()));
         } catch (IOException e) {
@@ -25,19 +25,26 @@ public class TCP {
         }
         // enviamos nosotros
     }
-    
+
     void conectarse(String username) {
 
         // escribimos al servidor nuestro nombre de usuario
-        Paquete p = new Paquete(0, username, 0);
+        Paquete p = new Paquete(0, username, 0, null);
         out.println(p.JSONToString());
     }
 
 	public void realizarLlamada(String usuario) {
-        Paquete paquete = new Paquete(0, usuario, 2);
+        Paquete paquete = new Paquete(0, usuario, 2, null);
         out.println(paquete.JSONToString());
+        out.flush();
     }
-    
+	
+	public void terminar(String nick_usuario) {
+        Paquete paquete = new Paquete(0, nick_usuario, 5, null);
+        out.println(paquete.JSONToString());
+        out.flush();
+	}
+
 
 	public void recibirLlamada() {
         String fromServer;
@@ -71,7 +78,7 @@ public class TCP {
             System.out.println(temp);
             Paquete p = Paquete.JSONstrToObj(temp);
             if (p.getTipo_operacion()==4) {
-                return p.getMensaje();
+                return p.getSender()+": "+p.getMensaje();
             }
             return "";
         } catch (IOException e) {
@@ -81,8 +88,8 @@ public class TCP {
         }
 	}
 
-	public void enviar(String text) {
-        Paquete paquete = new Paquete(0,text,3);
+	public void enviar(String text, String sender) {
+        Paquete paquete = new Paquete(0,text,3, sender);
         out.println(paquete.JSONToString());
 	}
 }

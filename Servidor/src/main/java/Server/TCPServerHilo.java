@@ -9,6 +9,7 @@ import java.net.SocketAddress;
 
 import Client.Paquete;
 
+
 public class TCPServerHilo extends Thread {
 
     public Socket socket = null;
@@ -26,11 +27,10 @@ public class TCPServerHilo extends Thread {
     }
 
     public void run() {
-
         try {
             SocketAddress addr = socket.getRemoteSocketAddress();
             int port = socket.getPort();
-
+            
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
@@ -41,56 +41,38 @@ public class TCPServerHilo extends Thread {
 
                 // Vemos que codigo de operacion tiene
                 if (paquete.getTipo_operacion()==0) {
-                    Cliente e = new Cliente(addr, port, paquete.getMensaje());
+                	Cliente e = new Cliente(addr, port, paquete.getMensaje());
                     this.cliente = e;
                     servidor.clientesEnLinea.add(e);
                 }else if (paquete.getTipo_operacion() == 2) {
-                    System.out.println("paquete recibido llamando a 2");
+                    System.out.println("paquete recibido llamando a "+paquete.getMensaje());
                     llamarA(paquete.getMensaje());
+                }else if(paquete.getTipo_operacion()==5) {
+                	System.out.println("Terminando llamada");
+                    this.enLlamada = false;
                 }
             }
 
-            // String inputLine, outputLine;
-
-            // while ((inputLine = in.readLine()) != null) {
-            // System.out.println("Mensaje recibido: " + inputLine);
-
-            // //out.println(inputLine);
-
-            // //to-do: utilizar json
-            // if (inputLine.equals("Bye")) {
-            // outputLine = "Usted apago el hilo";
-            // break;
-
-            // }else if (inputLine.equals("Terminar todo")) {
-            // servidor.listening = false;
-            // outputLine = "Usted apago todo";
-            // break;
-
-            // }else if (inputLine.split(":").length > 1) {
-            // String usuario = inputLine.split(":")[1];
-            // servidor.clientesEnLinea.add(usuario);
-            // outputLine = "Usuario/a "+usuario+"agregado";
-
-            // }else {
-            // outputLine = "Lista de usuarios: " ;
-
-            // Iterator<String> iter = servidor.usuarios.iterator();
-
-            // while (iter.hasNext()) {
-            // outputLine = outputLine + " - " + iter.next();
-            // }
-            // }
-
-            // out.println(outputLine);
-            // }
             out.close();
             in.close();
+            for(int i=0; i< servidor.clientesEnLinea.size();i++) {
+            	System.out.println(servidor.clientesEnLinea.get(i).getPort() == socket.getPort());
+            	if(servidor.clientesEnLinea.get(i).getPort() == socket.getPort()) {
+            		System.out.println("Cliente "+servidor.clientesEnLinea.get(i).getUsername()+" fuera");
+            		servidor.clientesEnLinea.remove(i);
+            		break;
+            	}
+            }
+            
             socket.close();
+            
+            
+           
+            
             System.out.println("Finalizando Hilo");
-
-        } catch (IOException e) {
-            e.printStackTrace();
+           
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -104,9 +86,6 @@ public class TCPServerHilo extends Thread {
         }
 
         try {
-            // System.out.println("puerto this"+this.socket.getPort());
-            // System.out.println("puerto hiloCliente2 "+ servidor.hilosClientes.get(posHiloCliente2));
-            // System.out.println("puerto hiloCliente2 "+ hiloCliente2);
             System.out.println("Antes del while");
             enLlamada=true;
             while (enLlamada) {
@@ -114,28 +93,16 @@ public class TCPServerHilo extends Thread {
                 String entrada = this.in.readLine();
                 Paquete pentrada = Paquete.JSONstrToObj(entrada);
                 if (pentrada.getTipo_operacion()==3) {
-                    Paquete p = new Paquete(0, pentrada.getMensaje(), 4);
+                    Paquete p = new Paquete(0, pentrada.getMensaje(), 4, pentrada.getSender());
                     servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
-                }else if (pentrada.getTipo_operacion()==5) {
-                   break;
+                    servidor.hilosClientes.get(posHiloCliente2).out.flush();
+                }else if(pentrada.getTipo_operacion()==5) {
+                	System.out.println("Terminando llamada");
+                    this.enLlamada = false;
                 }
                 System.out.println("Al salir del while");
             }
-            // System.out.println("despues del enviar la salida al fer");
-            // System.out.println("despues del enviar la salida al otro");
-
-            // PrintWriter out2 = new PrintWriter(socketDelCliente2.getOutputStream(), true);
-            // BufferedReader in2 = new BufferedReader(new InputStreamReader(socketDelCliente2.getInputStream()));
-            // PrintWriter out1 = new PrintWriter(socket.getOutputStream(), true);
-            // BufferedReader in1 = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-            // String inputLine1, inputLine2=null;
-            // while ((inputLine1 = in.readLine()) != null || (inputLine2 = in2.readLine()) != null ) {
-            //     System.out.println(inputLine1);
-            //     out1.println(inputLine1);
-            //     out2.println(inputLine2);
-            // }
-            // System.out.println("Dejo de enviar datos");
+            System.out.println("While de llamada finalizado");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
