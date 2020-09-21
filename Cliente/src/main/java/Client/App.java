@@ -229,6 +229,10 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             	llamarButton.setVisible(true);
                 System.out.println("enviando mensaje de terminar");
                 tcp.terminar(nickuser);
+        	}else if(mensaje.equals("codeocupado")) {
+        		campochat.append("USUARIO "+ip.getSelectedItem().toString() +" OCUPADO");
+        		llamarButton.setVisible(true);
+            	terminar.setVisible(false);
         	}else {
             	campochat.append(mensaje + "\n");
             }

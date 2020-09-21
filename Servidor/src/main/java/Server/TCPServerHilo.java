@@ -22,6 +22,7 @@ public class TCPServerHilo extends Thread {
 
     Server servidor;
     public boolean enLlamada;
+    public boolean enLlamadaBidireccional;
 
     public TCPServerHilo(Socket socket, Server servidor) {
         super("TCPServerHilo");
@@ -56,6 +57,7 @@ public class TCPServerHilo extends Thread {
                 }else if(paquete.getTipo_operacion()==5) {
                 	System.out.println("Terminando llamada");
                     this.enLlamada = false;
+                    this.enLlamadaBidireccional = false;
                 }
             }
 
@@ -92,7 +94,13 @@ public class TCPServerHilo extends Thread {
         }
 
         try {
-            System.out.println("Antes del while");
+            System.out.println("Antes del while"+servidor.hilosClientes.get(posHiloCliente2).enLlamadaBidireccional);
+            if(servidor.hilosClientes.get(posHiloCliente2).enLlamadaBidireccional) {
+            	Paquete error = new Paquete(0, "En llamada", 7, null);
+            	this.out.println(error.JSONToString());
+            	this.out.flush();
+            	return;
+            }
             enLlamada=true;
             Paquete p;
             if(origen != null) {
@@ -104,6 +112,9 @@ public class TCPServerHilo extends Thread {
             	p = new Paquete(0, "", 6, origen);
                 servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
                 servidor.hilosClientes.get(posHiloCliente2).out.flush();
+            }else {
+            	this.enLlamadaBidireccional = true;
+                servidor.hilosClientes.get(posHiloCliente2).enLlamadaBidireccional = true;
             }
             while (enLlamada) {
                 System.out.println("Al entrar al while");
@@ -116,6 +127,7 @@ public class TCPServerHilo extends Thread {
                 }else if(pentrada.getTipo_operacion()==5) {
                     System.out.println("Terminando llamada");
                     this.enLlamada = false;
+                    this.enLlamadaBidireccional =false;
                     p = new Paquete(0, pentrada.getMensaje(), 5, null);
                     servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
                     servidor.hilosClientes.get(posHiloCliente2).out.flush();

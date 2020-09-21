@@ -62,6 +62,8 @@ public class TCP {
             	return "codellamada";
             }else if(p.getTipo_operacion()==5) {
             	return "codeterminar";
+            }else if(p.getTipo_operacion()==7) {
+            	return "codeocupado";
             }
             return "";
         } catch (IOException e) {
