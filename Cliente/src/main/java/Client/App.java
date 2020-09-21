@@ -59,7 +59,7 @@ class MarcoCliente extends JFrame {
 
         add(milamina);
         setDefaultCloseOperation(3);
-        setBounds(700, 300, 300, 500);
+        setBounds(300, 100, 300, 500);
 
         setVisible(true);
         this.addWindowListener(new WindowAdapter(){
@@ -184,11 +184,11 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             }
         });*/
 
-        Labelnick.setBounds(10,10,40,10);
-        nick.setBounds(42, 10, 100, 10);
-        online.setBounds(10, 50, 80, 10);
+        Labelnick.setBounds(10,10,40,20);
+        nick.setBounds(42, 10, 100, 20);
+        online.setBounds(10, 50, 80, 20);
         refreshOnlines.setBounds(160,40,40,30);
-        llamarButton.setBounds(160,75,80,25);
+        llamarButton.setBounds(160,75,100,25);
         campochat.setBounds(10,105,265,240);
         campo1.setBounds(10,350,185,20);
         miboton.setBounds(200, 349, 80, 22);
