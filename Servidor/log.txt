@@ -1,8 +1,0 @@
-2020/09/20 23:29:33: El cliente 1 con Ip: 127.0.0.1:36894 se a conectado al servidor
-2020/09/20 23:29:38: El cliente 2 con Ip: 127.0.0.1:36898 se a conectado al servidor
-2020/09/20 23:29:53: /127.0.0.1;36894 llamo a 127.0.0.1:36898
-2020/09/20 23:34:23: El cliente giuli con Ip: 127.0.0.1:36930 se a conectado al servidor
-2020/09/20 23:34:27: El cliente cielo con Ip: 127.0.0.1:36934 se a conectado al servidor
-2020/09/20 23:34:35: El cliente con direccion: 127.0.0.1:54722 solicito ver los usuarios online
-2020/09/20 23:34:36: El cliente con direccion: 127.0.0.1:46577 solicito ver los usuarios online
-2020/09/20 23:34:39: /127.0.0.1;36930 llamo a 127.0.0.1:36934
