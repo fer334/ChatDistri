@@ -6,11 +6,11 @@
 
 ## Integrantes
 
-  - Gerardo Cabrera
-  - Giuliano Gonzalez
-  - Walter Gauto
-  - Elias Caceres
-  - [Luis Rios](https://github.com/fer334)
+  - Gerardo Cabrera [![alt text](http://i.imgur.com/9I6NRUm.png)](https://github.com/ger99)
+  - Giuliano Gonzalez [![alt text](http://i.imgur.com/9I6NRUm.png)](https://github.com/Giuli1297)
+  - Walter Gauto [![alt text](http://i.imgur.com/9I6NRUm.png)](https://github.com/waltergauto)
+  - Elias Caceres [![alt text](http://i.imgur.com/9I6NRUm.png)](https://github.com/elias-py)
+  - Luis Rios [![alt text](http://i.imgur.com/9I6NRUm.png)](https://github.com/fer334)
 
 ## Requisitos de instalación
 
