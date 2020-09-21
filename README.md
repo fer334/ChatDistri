@@ -52,6 +52,21 @@ El servidor recibe una instancia de la clase Paquete que contiene:
   - mensaje: mensaje que se desea transmitir que es un String
   - otro: mensaje que se desea transmitir pero con una estructura diferente a String
   - sender: Cadena que indica el username del que envio
+  
+Servidor
+  El servidor recibe datos en formato JSON que luego se convierten en un objeto Paquete. Por ejemplo:
+  {"estado":0,"sender":"user1","mensaje":"Hola","tipo_operacion":4}
+  Este JSON se convierte a un objeto Paquete donde:
+  Paquete paq = (estado  = 0, mensaje = "Hola", tipo_operacion = 4, sender = user1)
+Además, el servidor responde a los clientes de acuerdo a su tipo de operación(detallado más arriba) y lo hace instanciando la clase Paquete. Por ejemplo:
+Paquete consultaOnline= (estado  = 0, mensaje = "", tipo_operacion = 1, sender = null)
+En este caso, el servidor enviará una respuesta tipo: Paquete respuesta = new Paquete(0, usuarios, 0); donde usuarios es un ArrayList de usuarios. Vale la pena resaltar de también este paquete se convierte a JSON.
+Metodos
+- TCP.conectarse(username): recibe un String username y solicita al servidor ingresar a la lista de clientes online. En servidor crea dos hilos(uno para TCP y otro para UDP) para su comunicación con el cliente.
+- TCP.realizarLlamada(destino, origen): realiza la accion de "llamar". Llama al usuario destino enviado como parámetro. El servidor conecta la entrada y salida del origen y destino para que puedan establecer la llamada.
+- TCP.terminar(usuario): realiza la funcionalidad de terminar una llamada. El servidor desconecta la entrada y salida del origen y vuelve a los dos clientes a un estado disponible para que puedan recibir llamadas nuevamente.
+- UDP.verOnline(): retorna un array con la lista de clientes conectados.
+
 
 ## License
 ----
