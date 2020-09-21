@@ -2,28 +2,14 @@ package Client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.Image.*;
-import java.beans.PropertyChangeListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
-import java.net.URL.*;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
-import Client.UDP;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -80,7 +66,6 @@ class MarcoCliente extends JFrame {
 class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 
     private JTextField campo1;// campo donde se escribe el texto a enviar
-    private JLabel nick; // campo donde se visualizará el nick name del usuario
     private JComboBox<String> ip; // campo donde se visualizará la direccion ip del cliente con el que se está
                                   // llevando a cabo la conversacion
     private JTextArea campochat;// area de chat

@@ -9,8 +9,6 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import org.json.simple.parser.ParseException;
-
 public class UDP {
 
     String direccionServidor;
