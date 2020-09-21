@@ -59,7 +59,7 @@ class MarcoCliente extends JFrame {
 
         add(milamina);
         setDefaultCloseOperation(3);
-        setBounds(700, 300, 300, 500);
+        setBounds(300, 100, 300, 500);
 
         setVisible(true);
         this.addWindowListener(new WindowAdapter(){
@@ -99,9 +99,10 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 
         setLayout(null);
 
-        String entorno = "<html><body>Nick: "+nick_usuario+"<br><br>En Linea:</body></html>";
-        JLabel n_nick = new JLabel(entorno);
-
+ 
+        JLabel Labelnick = new JLabel("Nick: ");
+        JLabel nick = new JLabel(nick_usuario);
+        JLabel online= new JLabel("En linea: ");   
         tcp.conectarse(nick_usuario);
 
         ip = new JComboBox<String>();// configuramos el cuadro de texto para que aparezca a la izquierda
@@ -183,15 +184,19 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
             }
         });*/
 
-        n_nick.setBounds(10,10,100,60);
+        Labelnick.setBounds(10,10,40,20);
+        nick.setBounds(42, 10, 100, 20);
+        online.setBounds(10, 50, 80, 20);
         refreshOnlines.setBounds(160,40,40,30);
-        llamarButton.setBounds(160,75,80,25);
+        llamarButton.setBounds(160,75,100,25);
         campochat.setBounds(10,105,265,240);
         campo1.setBounds(10,350,185,20);
         miboton.setBounds(200, 349, 80, 22);
         ip.setBounds(65, 45, 80, 25);
         terminar.setBounds(20, 380 , 250, 25);
-        add(n_nick);
+        add(Labelnick);
+        add(nick);
+        add(online);
         add(ip); // agregamos el cuadro de texto a la lamina(interfaz)
         add(refreshOnlines);
         add(llamarButton);
