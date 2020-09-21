@@ -1,11 +1,14 @@
 package Server;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;   
 
 import Client.Paquete;
 
@@ -42,7 +45,10 @@ public class TCPServerHilo extends Thread {
                 // Vemos que codigo de operacion tiene
                 if (paquete.getTipo_operacion()==0) {
                 	Cliente e = new Cliente(addr, port, paquete.getMensaje());
-                    this.cliente = e;
+                	this.servidor.writer = new FileWriter("log.txt", true);
+                	this.servidor.writer.write(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()).toString()+": El cliente "+e.getUsername()+" con Ip: "+e.getdireccion()+":"+e.getPort()+" se a conectado al servidor\n");
+                	this.servidor.writer.close();
+                	this.cliente = e;
                     servidor.clientesEnLinea.add(e);
                 }else if (paquete.getTipo_operacion() == 2) {
                     System.out.println("paquete recibido llamando a "+paquete.getMensaje());
@@ -57,7 +63,7 @@ public class TCPServerHilo extends Thread {
             in.close();
             for(int i=0; i< servidor.clientesEnLinea.size();i++) {
             	System.out.println(servidor.clientesEnLinea.get(i).getPort() == socket.getPort());
-            	if(servidor.clientesEnLinea.get(i).getPort() == socket.getPort()) {
+            	if(servidor.clientesEnLinea.get(i).getdireccion().equals(new Cliente(addr, port, null).getdireccion()) && servidor.clientesEnLinea.get(i).getPort() == socket.getPort()) {
             		System.out.println("Cliente "+servidor.clientesEnLinea.get(i).getUsername()+" fuera");
             		servidor.clientesEnLinea.remove(i);
             		break;
@@ -90,6 +96,11 @@ public class TCPServerHilo extends Thread {
             enLlamada=true;
             Paquete p;
             if(origen != null) {
+            	
+            	this.servidor.writer = new FileWriter("log.txt", true);
+            	this.servidor.writer.write(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()).toString()+": "+socket.getInetAddress().toString()+";"+socket.getPort()+" llamo a "+servidor.hilosClientes.get(posHiloCliente2).cliente.getdireccion()+":"+servidor.hilosClientes.get(posHiloCliente2).cliente.getPort()+"\n");
+            	this.servidor.writer.close();
+            	
             	p = new Paquete(0, "", 6, origen);
                 servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
                 servidor.hilosClientes.get(posHiloCliente2).out.flush();
