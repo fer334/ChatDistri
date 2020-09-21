@@ -1,10 +1,13 @@
 package Server;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;   
 
 import Client.Paquete;
 
@@ -66,6 +69,9 @@ public class UDP extends Thread{
 
                 if (p.getTipo_operacion() == 1) {
                     ArrayList<String> usuarios = new ArrayList<>();
+                    this.server.writer = new FileWriter("log.txt", true);
+                    this.server.writer.write(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()).toString()+": "+"El cliente con direccion: "+cliente.getdireccion()+":"+cliente.getPort()+" solicito ver los usuarios online\n");
+                    this.server.writer.close();
                     for (Cliente c : server.clientesEnLinea) {
                         usuarios.add(c.getUsername());
                     }

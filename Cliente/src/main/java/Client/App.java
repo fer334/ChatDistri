@@ -6,6 +6,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Image.*;
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +14,10 @@ import java.io.InputStreamReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URL.*;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
@@ -50,11 +54,12 @@ class MarcoCliente extends JFrame {
     public MarcoCliente(TCP tcp, UDP udp) {
         this.tcp = tcp;
         this.udp = udp;
-        setBounds(600, 300, 280, 350);
 
         LaminaMarcoCliente milamina = new LaminaMarcoCliente(tcp, udp);
 
         add(milamina);
+        setDefaultCloseOperation(3);
+        setBounds(300, 100, 300, 500);
 
         setVisible(true);
         this.addWindowListener(new WindowAdapter(){
@@ -81,6 +86,8 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
     private JTextArea campochat;// area de chat
     private JButton miboton; // boton para enviar mensajes
     private String nickuser;
+    JButton llamarButton;
+    JButton terminar;
     TCP tcp;
     UDP udp;
 
@@ -89,32 +96,47 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         this.udp = udp;
         String nick_usuario = JOptionPane.showInputDialog("Ingrese su Ni:");
         nickuser = nick_usuario;
-        
 
-        JLabel n_nick = new JLabel("Nick:");
-        nick = new JLabel();
-        nick.setText(nick_usuario);
+        setLayout(null);
 
-        JLabel texto = new JLabel("En Linea:");
-
+ 
+        JLabel Labelnick = new JLabel("Nick: ");
+        JLabel nick = new JLabel(nick_usuario);
+        JLabel online= new JLabel("En linea: ");   
         tcp.conectarse(nick_usuario);
 
         ip = new JComboBox<String>();// configuramos el cuadro de texto para que aparezca a la izquierda
-        JButton refreshOnlines = new JButton("Reload");
-        JButton llamarButton = new JButton("LLamar");
+        JButton refreshOnlines;
+        try{
+            refreshOnlines = new JButton(new ImageIcon(((new ImageIcon(
+                new URL("https://icons.iconarchive.com/icons/hopstarter/soft-scraps/24/Button-Refresh-icon.png"))
+                .getImage()
+                .getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH)))));
+            //refreshOnlines.setBorder(BorderFactory.createEmptyBorder());
+            refreshOnlines.setContentAreaFilled(false);;
+
+        }catch(MalformedURLException e){
+            refreshOnlines = new JButton("Refresh");
+
+        }
+        llamarButton = new JButton("LLamar");
 
 
         campochat = new JTextArea(12, 20);// lugar de colocacion del area de texto, las coordenadas son 12 y 20
-
+        campochat.setLineWrap(true);
+        campochat.setWrapStyleWord(true);
         campo1 = new JTextField(20); // area donde se escribirá el mensaje a enviar
 
         miboton = new JButton("Enviar"); // boton para enviar el texto escrito
-        JButton terminar = new JButton("Terminar llamada"); // boton para enviar el texto escrito
+
+        terminar = new JButton("Terminar llamada"); // boton para enviar el texto escrito
+
+        terminar.setVisible(false);
 
         miboton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                campochat.append(campo1.getText() + "\n");
+                campochat.append(nick_usuario+": "+campo1.getText() + "\n");
                 tcp.enviar(campo1.getText(), nick_usuario);
                 campo1.setText("");
             }
@@ -122,6 +144,8 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         terminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	terminar.setVisible(false);
+            	llamarButton.setVisible(true);
                 System.out.println("enviando mensaje de terminar");
                 tcp.terminar(nick_usuario);
             }
@@ -129,23 +153,27 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         llamarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tcp.realizarLlamada(ip.getSelectedItem().toString());
+            	llamarButton.setVisible(false);
+            	terminar.setVisible(true);
+                tcp.realizarLlamada(ip.getSelectedItem().toString(), nickuser);
             }
         });
-        
-        refreshOnlines.addActionListener(new ActionListener() {
+
+       refreshOnlines.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ip.removeAllItems();
 				ArrayList<String> clientesOnline = udp.getClientesOnline();
 				for(int i=0; i<clientesOnline.size(); i++) {
 					System.out.println(clientesOnline.get(i));
-					ip.addItem(clientesOnline.get(i));
+                    if (!clientesOnline.get(i).equals(nick_usuario)) {
+                        ip.addItem(clientesOnline.get(i));
+                    }
+
 				}
-				
+
 			}
         });
-        
         /*ip.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -155,11 +183,20 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
 
             }
         });*/
-        
 
-        add(n_nick);
+        Labelnick.setBounds(10,10,40,20);
+        nick.setBounds(45, 10, 100, 20);
+        online.setBounds(10, 50, 80, 20);
+        refreshOnlines.setBounds(245,45,30,30);
+        llamarButton.setBounds(75,85,200,30);
+        campochat.setBounds(10,120,265,250);
+        campo1.setBounds(10,380,185,25);
+        miboton.setBounds(200, 380, 75, 25);
+        ip.setBounds(75, 45, 165, 30);
+        terminar.setBounds(20, 410 , 250, 30);
+        add(Labelnick);
         add(nick);
-        add(texto);
+        add(online);
         add(ip); // agregamos el cuadro de texto a la lamina(interfaz)
         add(refreshOnlines);
         add(llamarButton);
@@ -173,7 +210,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         mihilo.start();
 
     }
-    
+
     public String getNick() {
     	return this.nickuser;
     }
@@ -182,12 +219,25 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
     public void run() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-            while(true){//el cliente se pone a la escucha
-
-
-                campochat.append(this.tcp.escuchar() + "\n");
-
+        while(true){//el cliente se pone a la escucha
+            String mensaje = this.tcp.escuchar();
+            if(mensaje.equals("codellamada")) {
+            	llamarButton.setVisible(false);
+            	terminar.setVisible(true);
+            }else if(mensaje.equals("codeterminar")){
+            	terminar.setVisible(false);
+            	llamarButton.setVisible(true);
+                System.out.println("enviando mensaje de terminar");
+                tcp.terminar(nickuser);
+        	}else if(mensaje.equals("codeocupado")) {
+        		campochat.append("USUARIO "+ip.getSelectedItem().toString() +" OCUPADO");
+        		llamarButton.setVisible(true);
+            	terminar.setVisible(false);
+        	}else {
+            	campochat.append(mensaje + "\n");
             }
+        	
+        }
 
     }
 

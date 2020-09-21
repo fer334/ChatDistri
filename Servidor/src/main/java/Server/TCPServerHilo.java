@@ -1,11 +1,14 @@
 package Server;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;   
 
 import Client.Paquete;
 
@@ -19,6 +22,7 @@ public class TCPServerHilo extends Thread {
 
     Server servidor;
     public boolean enLlamada;
+    public boolean enLlamadaBidireccional;
 
     public TCPServerHilo(Socket socket, Server servidor) {
         super("TCPServerHilo");
@@ -42,14 +46,18 @@ public class TCPServerHilo extends Thread {
                 // Vemos que codigo de operacion tiene
                 if (paquete.getTipo_operacion()==0) {
                 	Cliente e = new Cliente(addr, port, paquete.getMensaje());
-                    this.cliente = e;
+                	this.servidor.writer = new FileWriter("log.txt", true);
+                	this.servidor.writer.write(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()).toString()+": El cliente "+e.getUsername()+" con Ip: "+e.getdireccion()+":"+e.getPort()+" se a conectado al servidor\n");
+                	this.servidor.writer.close();
+                	this.cliente = e;
                     servidor.clientesEnLinea.add(e);
                 }else if (paquete.getTipo_operacion() == 2) {
                     System.out.println("paquete recibido llamando a "+paquete.getMensaje());
-                    llamarA(paquete.getMensaje());
+                    llamarA(paquete.getMensaje(), paquete.getSender());
                 }else if(paquete.getTipo_operacion()==5) {
                 	System.out.println("Terminando llamada");
                     this.enLlamada = false;
+                    this.enLlamadaBidireccional = false;
                 }
             }
 
@@ -57,7 +65,7 @@ public class TCPServerHilo extends Thread {
             in.close();
             for(int i=0; i< servidor.clientesEnLinea.size();i++) {
             	System.out.println(servidor.clientesEnLinea.get(i).getPort() == socket.getPort());
-            	if(servidor.clientesEnLinea.get(i).getPort() == socket.getPort()) {
+            	if(servidor.clientesEnLinea.get(i).getdireccion().equals(new Cliente(addr, port, null).getdireccion()) && servidor.clientesEnLinea.get(i).getPort() == socket.getPort()) {
             		System.out.println("Cliente "+servidor.clientesEnLinea.get(i).getUsername()+" fuera");
             		servidor.clientesEnLinea.remove(i);
             		break;
@@ -76,29 +84,54 @@ public class TCPServerHilo extends Thread {
         }
     }
 
-    private void llamarA(String usuario) {
+    private void llamarA(String destino, String origen) {
         int posHiloCliente2 = 0;
         for (int i = 0; i < servidor.hilosClientes.size(); i++) {
-            if (servidor.hilosClientes.get(i).cliente.getUsername().equals(usuario)) {
+            if (servidor.hilosClientes.get(i).cliente.getUsername().equals(destino)) {
                 posHiloCliente2 = i;
                 break;
             }
         }
 
         try {
-            System.out.println("Antes del while");
+            System.out.println("Antes del while"+servidor.hilosClientes.get(posHiloCliente2).enLlamadaBidireccional);
+            if(servidor.hilosClientes.get(posHiloCliente2).enLlamadaBidireccional) {
+            	Paquete error = new Paquete(0, "En llamada", 7, null);
+            	this.out.println(error.JSONToString());
+            	this.out.flush();
+            	return;
+            }
             enLlamada=true;
+            Paquete p;
+            if(origen != null) {
+            	
+            	this.servidor.writer = new FileWriter("log.txt", true);
+            	this.servidor.writer.write(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()).toString()+": "+socket.getInetAddress().toString()+";"+socket.getPort()+" llamo a "+servidor.hilosClientes.get(posHiloCliente2).cliente.getdireccion()+":"+servidor.hilosClientes.get(posHiloCliente2).cliente.getPort()+"\n");
+            	this.servidor.writer.close();
+            	
+            	p = new Paquete(0, "", 6, origen);
+                servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
+                servidor.hilosClientes.get(posHiloCliente2).out.flush();
+            }else {
+            	this.enLlamadaBidireccional = true;
+                servidor.hilosClientes.get(posHiloCliente2).enLlamadaBidireccional = true;
+            }
             while (enLlamada) {
                 System.out.println("Al entrar al while");
                 String entrada = this.in.readLine();
                 Paquete pentrada = Paquete.JSONstrToObj(entrada);
-                if (pentrada.getTipo_operacion()==3) {
-                    Paquete p = new Paquete(0, pentrada.getMensaje(), 4, pentrada.getSender());
+                if (enLlamada==true && pentrada.getTipo_operacion()==3) {
+                    p = new Paquete(0, pentrada.getMensaje(), 4, pentrada.getSender());
                     servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
                     servidor.hilosClientes.get(posHiloCliente2).out.flush();
                 }else if(pentrada.getTipo_operacion()==5) {
-                	System.out.println("Terminando llamada");
+                    System.out.println("Terminando llamada");
                     this.enLlamada = false;
+                    this.enLlamadaBidireccional =false;
+                    p = new Paquete(0, pentrada.getMensaje(), 5, null);
+                    servidor.hilosClientes.get(posHiloCliente2).out.println(p.JSONToString());
+                    servidor.hilosClientes.get(posHiloCliente2).out.flush();
+                    servidor.hilosClientes.get(posHiloCliente2).enLlamada = false;
                 }
                 System.out.println("Al salir del while");
             }
