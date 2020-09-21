@@ -185,15 +185,15 @@ class LaminaMarcoCliente extends JPanel implements Runnable {// interfaz
         });*/
 
         Labelnick.setBounds(10,10,40,20);
-        nick.setBounds(42, 10, 100, 20);
+        nick.setBounds(45, 10, 100, 20);
         online.setBounds(10, 50, 80, 20);
-        refreshOnlines.setBounds(160,40,40,30);
-        llamarButton.setBounds(160,75,100,25);
-        campochat.setBounds(10,105,265,240);
-        campo1.setBounds(10,350,185,20);
-        miboton.setBounds(200, 349, 80, 22);
-        ip.setBounds(65, 45, 80, 25);
-        terminar.setBounds(20, 380 , 250, 25);
+        refreshOnlines.setBounds(245,45,30,30);
+        llamarButton.setBounds(75,85,200,30);
+        campochat.setBounds(10,120,265,250);
+        campo1.setBounds(10,380,185,25);
+        miboton.setBounds(200, 380, 75, 25);
+        ip.setBounds(75, 45, 165, 30);
+        terminar.setBounds(20, 410 , 250, 30);
         add(Labelnick);
         add(nick);
         add(online);
